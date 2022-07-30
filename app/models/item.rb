@@ -1,5 +1,4 @@
-class Customer < ApplicationRecord
-  belongs_to :supermarket
+class Item < ApplicationRecord
   has_many :customer_items
   has_many :items, through: :customer_items
 end
