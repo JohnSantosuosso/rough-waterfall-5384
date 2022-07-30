@@ -2,6 +2,11 @@
 
 <p>Items<%@customer.items.each do |item| %></p>
 <p>Item name: <%= item.name %></p>
+<p>Item price: <%= item.price %></p>
 <% end %>
+
+<div id='total_price'>
+<p>Total Price: <%=@customer.items_total_price %></p>
+</div>
 
 <p> Supermarket: <%=@customer.supermarket.name %></p>

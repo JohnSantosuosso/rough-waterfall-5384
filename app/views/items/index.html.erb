@@ -1,0 +1,5 @@
+<p>All Items <% @supermarket.customers.each do |customer| %></p>
+<%customer.all_purchases.distinct.each do |item| %>
+<p><%=item.name %></p>
+<% end %>
+<% end %>

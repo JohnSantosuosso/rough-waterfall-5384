@@ -1,11 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+  require 'rails_helper'
 
+RSpec.describe 'Item Index Page' do
+it 'shows all items associated with that supermarket and does not show duplicates' do
     supermarket_1 = Supermarket.create!(id: 10000000000, name: 'Giant', location: "Denver")
     supermarket_2 = Supermarket.create!(id: 2, name: 'Safeway', location: "Tampa")
     
@@ -19,5 +15,12 @@
     customer_item_1 = CustomerItem.create!(id: 1000000, customer_id: customer_1.id, item_id: item_1.id)
     customer_item_2 = CustomerItem.create!(id: 2000000, customer_id: customer_1.id, item_id: item_2.id)
     customer_item_3 = CustomerItem.create!(id: 3000000, customer_id: customer_1.id, item_id: item_3.id)
-    customer_item_4 = CustomerItem.create!(id: 4000000, customer_id: customer_2.id, item_id: item_3.id)
+    customer_item_4 = CustomerItem.create!(id: 4000000, customer_id: customer_1.id, item_id: item_3.id)
     
+    visit "/supermarkets/#{supermarket_1.id}/items"
+
+    expect(page).to have_content("Apple")
+    expect(page).to have_content("Pear")
+    expect(page).to have_content("Bannana", count: 1)
+  end
+end
